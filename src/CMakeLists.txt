@@ -10,5 +10,5 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 add_library(mddriver_lib ${SOURCES})
 
 # Link the library with the main executable
-target_link_libraries(mddriver mddriver_lib)
+# target_link_libraries(mddriver mddriver_lib)
 

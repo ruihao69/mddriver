@@ -56,7 +56,7 @@ struct RungeKutta4 {
   size_t i;
   std::vector<Y> k;
   Y r;
-  RungeKutta4(std::function<Y(X, Y)> func) : f(func), size(1), steps(0), i(0), r(get_zero<Y>(), k(get_ks<Y>(4, 1))){}
+  RungeKutta4(std::function<Y(X, Y)> func) : f(func), size(1), steps(0), i(0), r(get_zero<Y>()), k(get_ks<Y>(4, 1)){}
   RungeKutta4(std::function<Y(X, Y)> func, size_t size) : f(func), size(size), steps(0), i(0), r(get_zero<Y>(size), k(get_ks<Y>(4, size))){}
   void operator()(const X& xthis, const Y& ythis, X& xnext, Y& ynext, double h) {
     k[0] = h * f(xthis + h * 0.5, ythis);
@@ -69,6 +69,9 @@ struct RungeKutta4 {
 
     r = ythis + k[2];
     k[3] = h * f(xthis + h, r);
+
+    xnext = xthis + h;
+    ynext = ythis + (k[0] + 2.0 * k[1] + 2.0 * k[2] + k[3]) / 6.0;
   }
 };  // struct RungeKutta4
 
