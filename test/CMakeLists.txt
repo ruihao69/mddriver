@@ -25,3 +25,8 @@ target_link_libraries(rk4-lorenz PRIVATE
     Eigen3::Eigen
 )
 
+# Create the test executable for gaussian envolope pulse
+add_executable(gaussian_envolope_pulse "./test_gaussian_envolope.cpp")
+target_link_libraries(gaussian_envolope_pulse PRIVATE
+    mddriver_lib 
+)
